@@ -2,7 +2,7 @@ import time
 
 import streamlit as st
 
-from utils import read_newsletter_tab_of_spreadsheet, send_prompt_to_openai_api
+from utils import read_newsletter_tab_of_spreadsheet, send_dummy_prompt_to_openai_api
 
 
 st.markdown(body='# Charm Maui Wildfires Newsletter Generator')
@@ -31,14 +31,23 @@ if not st.session_state.generation_mode:
 if st.session_state.generation_mode:
     button_placeholder.empty()
 
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message['role']):
+            st.markdown(message['content'])
+
     if 'initial_newsletter_draft' not in st.session_state:
         # Read parsed data from Google Spreadsheet, prepare initial prompt
         spreadsheet_str_representation = read_newsletter_tab_of_spreadsheet()
 
         # Send the initial newsletter prompt to OpenAI API
-        st.session_state.initial_newsletter_draft = send_prompt_to_openai_api(
-            prompt=spreadsheet_str_representation,
-        )
+        with st.chat_message(name='assistant'):
+            message_placeholder = st.empty()
+
+            st.session_state.initial_newsletter_draft = send_dummy_prompt_to_openai_api(
+                prompt=spreadsheet_str_representation,
+                message_placeholder=message_placeholder,
+            )
 
         st.session_state.messages.append(
             {
@@ -47,12 +56,7 @@ if st.session_state.generation_mode:
             }
         )
 
-    # Display chat messages from history on app rerun
-    for message in st.session_state.messages:
-        with st.chat_message(message['role']):
-            st.markdown(message['content'])
-
-    prompt = st.chat_input('What is up?')  # TODO
+    prompt = st.chat_input(placeholder='What would you like to change about this newsletter draft?')
 
     if prompt:
         # Display user message in chat message container
@@ -69,23 +73,15 @@ if st.session_state.generation_mode:
 
         with st.spinner(text='Thinking...'):
             time.sleep(2)
-            response = send_prompt_to_openai_api(prompt=prompt)
 
         # Display assistant response in chat message container
         with st.chat_message(name='assistant'):
             message_placeholder = st.empty()
-            full_response = ''
 
-            # Simulate stream of response with milliseconds delay
-            for response_chunk in response:
-                full_response += response_chunk
-
-                time.sleep(0.01)
-
-                # Add a blinking cursor to simulate typing
-                message_placeholder.markdown(body=full_response + '▌')
-
-            message_placeholder.markdown(body=full_response)
+            response = send_dummy_prompt_to_openai_api(
+                prompt=prompt,
+                message_placeholder=message_placeholder,
+            )
 
         # Add assistant response to chat history
         st.session_state.messages.append(
