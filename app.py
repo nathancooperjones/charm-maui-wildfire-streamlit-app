@@ -12,10 +12,21 @@ from utils import (
 
 DUMMY_MODE = False  # e.g. should we actually send requests to OpenAI or not
 
+EMAIL_SUMMARY_AVATAR = '📧'
 
-st.markdown(body='# Charm Maui Wildfires Newsletter Generator')
 
-st.markdown(body='TODO: add a description about this app here!')
+st.markdown(body='# Maui Wildfires Newsletter Generator')
+
+st.markdown(
+    body=(
+        'We are processing emails to find relevant information for Maui wildfire relief and '
+        'assistance for residents. This app presents an interactive way to draft newsletters. '
+        'All output from this tool should be reviewed by a human before sending out to others.'
+    )
+)
+
+# display_email_summaries = st.checkbox(label='Display relief email summaries?', value=True)
+display_email_summaries = True
 
 st.markdown('-----')
 
@@ -55,6 +66,9 @@ if st.session_state.generation_mode:
 
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
+        if display_email_summaries is False and message.get('avatar') == EMAIL_SUMMARY_AVATAR:
+            continue
+
         if message['role'] != 'system':
             with st.chat_message(message['role'], avatar=message.get('avatar')):
                 st.markdown(message['content'])
@@ -63,16 +77,14 @@ if st.session_state.generation_mode:
         # Read parsed data from Google Spreadsheet, prepare initial prompt
         spreadsheet_str_representation = read_newsletter_tab_of_spreadsheet()
 
-        avatar = '📧'
-
-        with st.chat_message(name='user', avatar=avatar):
+        with st.chat_message(name='user', avatar=EMAIL_SUMMARY_AVATAR):
             st.markdown(body=spreadsheet_str_representation)
 
         st.session_state.messages.append(
             {
                 'role': 'user',
                 'content': spreadsheet_str_representation,
-                'avatar': avatar,
+                'avatar': EMAIL_SUMMARY_AVATAR,
             }
         )
 
