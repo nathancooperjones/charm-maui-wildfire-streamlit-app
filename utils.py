@@ -95,10 +95,7 @@ def send_dummy_prompt(message_placeholder: st.delta_generator.DeltaGenerator) ->
     return response_str
 
 
-def send_prompt_to_openai_api(
-    message_placeholder: st.delta_generator.DeltaGenerator,
-    token_limit: int = 3000,
-) -> str:
+def send_prompt_to_openai_api(message_placeholder: st.delta_generator.DeltaGenerator) -> str:
     """
     Send a prompt to the OpenAI API and return the parsed response as a string.
 
@@ -119,7 +116,7 @@ def send_prompt_to_openai_api(
         content_to_add = {'role': message['role'], 'content': message['content']}
         tokens_for_message = len(TIKTOKEN_TOKENIZER.encode(text=content_to_add['content']))
 
-        if total_tokens + tokens_for_message > token_limit:
+        if total_tokens + tokens_for_message > st.secrets['openai']['max_input_tokens']:
             break
 
         messages.insert(0, content_to_add)

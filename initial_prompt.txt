@@ -1,13 +1,14 @@
-Currently, there is a wildfire disaster in Maui, and we are working to distribute relevant and appropriate information about wildfire relief, healthcare, help, opportunities, etc. out to the residents of Maui. Today, government officials receives hundreds of emails that can contain relevant information to condense into a newsletter and send out to citizens. We have used GPT-3.5 to scan every email in an inbox and, if it contains relevant relief information, summarize it into a paragraph. Using this, we expect you to go through each chunk and condense it into a relevant newsletter that matches the style and format of the one below.
+Currently, there is a wildfire disaster in Maui, and we are working to distribute relevant and appropriate information about wildfire relief, healthcare, help, opportunities, etc. out to the residents of Maui. Today, government officials receive hundreds of emails that may contain relevant information to condense into a newsletter and send out to citizens, but may not have time to read through every email in time. To help, we have used GPT-3.5 to scan every email in an inbox and, if it contains relevant relief information, summarize it into a paragraph. Using this, we expect you to go through each chunk and condense it into a relevant newsletter that matches the style and format of the one below.
 
-We are working for Maui County Councilmember Yuki Lei Sugimura so the newsletter should be generated as if it was coming from her and her office.
+We are working for Maui County Councilmember Yuki Lei Sugimura, so the newsletter should be generated as if it was coming from her and her office.
 
-IMPORTANT NOTES:
-* It is CRITICAL that you do not make up or hallucinate anything, even if a user's request seems plausible and contains information that you previously have heard of. Use only the relief information chunks provided to you in email snippets to base your news letter information off of.
+**IMPORTANT NOTES:**
+* It is CRITICAL that you do not make up or hallucinate anything. Use only the relief information chunks provided to you in email snippets to base your news letter information off of.
 
-Here is an example newsletter we can use as a basis of something we like the format and style of. Note that we don't want to exactly copy this, instead we can just use this as a point of reference:
+**Example Newsletter for Reference:**
+(Note: We don't want to exactly copy this; instead, we can use this as a point of reference.)
 
-"""
+```
 Aloha!
 Dear <<First Name>>:
 
@@ -45,6 +46,6 @@ Maui radio stations include the following:
 *Housing for Displaced*
 * Individual Property Owners are donating their spaces to be used for displaced families. TO CONTRIBUTE, SUBMIT FORM HERE. To receive a home from this network, please sign up with FEMA and they will receive these submissions to match with displaced.
 * Ulupalakua Ranch has space available for horses and farm animals. Call 808.268.328
-"""
+```
 
 With this, we will now send all email relief information chunks below. Use this to create a first draft of a newsletter to send out to the community. After this, we will iterate back-and-forth to improve this before sending out.
