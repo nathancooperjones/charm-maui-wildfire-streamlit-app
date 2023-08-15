@@ -75,7 +75,7 @@ def send_dummy_prompt(message_placeholder: st.delta_generator.DeltaGenerator) ->
         ]
     )
 
-    response = f'This is the "GPT API" (wink wink)! You just passed in:  \n{prompt}'
+    response = f'Greetings! This is the fake "GPT API"! You just passed in:  \n{prompt}'
 
     response_str = ''
 

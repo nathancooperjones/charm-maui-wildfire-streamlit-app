@@ -15,6 +15,14 @@ DUMMY_MODE = False  # e.g. should we actually send requests to OpenAI or not
 EMAIL_SUMMARY_AVATAR = '📧'
 
 
+st.set_page_config(
+    page_title='Maui Wildfires Newsletter Generator',
+    page_icon='📰',
+    layout='centered',
+    initial_sidebar_state='collapsed',
+    menu_items=None,
+)
+
 st.markdown(body='# Maui Wildfires Newsletter Generator')
 
 st.markdown(
@@ -24,9 +32,6 @@ st.markdown(
         'All output from this tool should be reviewed by a human before sending out to others.'
     )
 )
-
-# display_email_summaries = st.checkbox(label='Display relief email summaries?', value=True)
-display_email_summaries = True
 
 st.markdown('-----')
 
@@ -66,7 +71,10 @@ if st.session_state.generation_mode:
 
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
-        if display_email_summaries is False and message.get('avatar') == EMAIL_SUMMARY_AVATAR:
+        if (
+            st.session_state.get('hide_email_summaries') is True
+            and message.get('avatar') == EMAIL_SUMMARY_AVATAR
+        ):
             continue
 
         if message['role'] != 'system':
