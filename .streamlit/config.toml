@@ -1,0 +1,26 @@
+[server]
+enableStaticServing = true
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+
+# Primary accent color for interactive elements.
+# primaryColor = "#000000"
+
+# Background color for the main content area.
+# backgroundColor = "#FFFFFF"
+
+# Background color used for the sidebar and most interactive widgets.
+# secondaryBackgroundColor = "#C0749C"  # Rep Score light purple
+
+# Color used for almost all text.
+# textColor = "#000000"
+
+# Font family for all text in the app, except code blocks. One of "sans serif", "serif", or "monospace".
+#font =

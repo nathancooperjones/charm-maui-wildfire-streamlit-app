@@ -1,0 +1,4 @@
+gspread_pandas
+pandas
+requests
+streamlit~=1.25
