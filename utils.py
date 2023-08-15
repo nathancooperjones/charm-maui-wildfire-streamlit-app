@@ -27,6 +27,7 @@ def read_newsletter_tab_of_spreadsheet() -> str:
                 sheet=0,
             )
             .sheet_to_df(index=None)
+            .dropna(how='all')
         )
 
     # filter irrelevant emails out if they do NOT contain relief information
