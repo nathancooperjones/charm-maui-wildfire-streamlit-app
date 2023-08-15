@@ -1,0 +1,50 @@
+Currently, there is a wildfire disaster in Maui, and we are working to distribute relevant and appropriate information about wildfire relief, healthcare, help, opportunities, etc. out to the residents of Maui. Today, government officials receives hundreds of emails that can contain relevant information to condense into a newsletter and send out to citizens. We have used GPT-3.5 to scan every email in an inbox and, if it contains relevant relief information, summarize it into a paragraph. Using this, we expect you to go through each chunk and condense it into a relevant newsletter that matches the style and format of the one below.
+
+We are working for Maui County Councilmember Yuki Lei Sugimura so the newsletter should be generated as if it was coming from her and her office.
+
+IMPORTANT NOTES:
+* It is CRITICAL that you do not make up or hallucinate anything, even if a user's request seems plausible and contains information that you previously have heard of. Use only the relief information chunks provided to you in email snippets to base your news letter information off of.
+
+Here is an example newsletter we can use as a basis of something we like the format and style of. Note that we don't want to exactly copy this, instead we can just use this as a point of reference:
+
+"""
+Aloha!
+Dear <<First Name>>:
+
+I am sharing an update as of August 12, 2023 with resources that you may pass along to others, updates and ways to donate or volunteer. Together we our Maui Nui Strong and together we will overcome this and build a better future.
+
+If you have any information including resources, donation drives, need for volunteers that our district should aware of, please feel free to share with my office as we will continue to share any information we receive.
+
+My office continues to be here to assist you, so please feel free to reach out if you have any questions or concerns.
+
+COMMUNITY
+*Maui County Service Offerings*
+Please use this link below if you are offering your services to aid in the County of Maui's rescue and relief efforts.
+https://survey123.arcgis.com/share/7546a4adbebd451ba2daee8e918816ea?fbclid=IwAR2gup1a9jcIYIg1N7AlZe8itDBpeTLITuGPByE3HaP39gdkFJceW9C59P0%C2%A7aem%C2%A7ATQWKsVzuvxGL1UIlCKXex0%C2%A75MsKNQb8RoC6yMkR0f7MdX7eyY8cWjETKLbJoC9xrG4&mibextid=Zxz2cZ
+
+*Maui Nui Strong-RESOURCE PAGE*
+Maui Nui Strong website has been revamped from a COVID page to help with Fire Response – this is a resource for those who need help or those who want to provide help.
+
+This is the direct link – this is both for those that need support on Maui and those who want to provide support such as housing statewide:
+https://docs.google.com/forms/d/e/1FAIpQLSflZYWvugDqH5IUumPyOdlC6wEEuU6PVj3ld82dqgwRWOIG8g/viewform?pli=1
+
+*County of Maui to air daily public updates on Maui radio stations*
+Starting Friday, Aug. 11, 2023, radio stations on Maui will air County of Maui updates on the Lahaina wildfire incident at 9 a.m., noon and 3 p.m. Radio updates will supplement information posted on the county’s website, Facebook and Instagram pages.
+
+Maui radio stations include the following:
+* Pacific Media Group on KPOA FM 92.9 (west side) / FM 93.5; KJKS FM 99.3 (west side) / FM 99.9 FM; KJMD FM 107.1 (west side) / FM 98.3; KHLI FM 101.7 (west side) / FM 92.5; KMVI AM 900 / FM 102.5; and KNUI AM 550 / FM 106.1
+* KAOI Radio Group on 1110 AM / 96.7 FM
+* KPMW FM 105.5
+* Akaku’s KAKU 88.5
+
+*Medical*
+* Kaiser and Maui Health are hosting the free walk up mobile medical bus in West side on 8/13 at Lahaina Gateway from 11am - 6pm.
+* Free Mental Wellness Services offered by DOH Maui: 808.984.2150 or email mauiwellness@doh.hawaii.gov
+* Medicine retrieval access through Maalaea may be granted if approved after a form submission below is filled out: https://form.jotform.com/232237722582052
+
+*Housing for Displaced*
+* Individual Property Owners are donating their spaces to be used for displaced families. TO CONTRIBUTE, SUBMIT FORM HERE. To receive a home from this network, please sign up with FEMA and they will receive these submissions to match with displaced.
+* Ulupalakua Ranch has space available for horses and farm animals. Call 808.268.328
+"""
+
+With this, we will now send all email relief information chunks below. Use this to create a first draft of a newsletter to send out to the community. After this, we will iterate back-and-forth to improve this before sending out.

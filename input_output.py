@@ -1,8 +1,6 @@
 import time
-from typing import Any, Dict
 
 import gspread_pandas
-import pandas as pd
 import requests
 import streamlit as st
 
@@ -75,47 +73,3 @@ def read_google_spreadsheet(
         'refreshing the window to attempt the connection again. Sorry about this!'
     )
     st.stop()
-
-
-def append_new_row_to_parsing_spreadsheet(
-    spread: str = st.secrets['spreadsheets']['parsing_results_spreadsheet'],
-    sheet: int = 0,
-    **kwargs: Dict[Any, Any],
-) -> None:
-    """
-    Append a new row to the asset tracker Google Spreadsheet.
-
-    NOTE: This is **NOT** ACID-compliant. Calling this function twice at the same time may only
-    append a single row.
-
-    Parameters
-    ----------
-    spread: str
-        URL of the spreadsheet to add the new row to
-    sheet: int
-        Sheet number of the Google Spreadsheet to write to
-    **kwargs: keyword arguments
-        Keyword arguments with keys being column names and values being the value to add in the
-        corresponding spreadsheet cell
-
-    Side Effects
-    ------------
-    Appends a new row to the Maui Wildfire Parsing Results Google Spreadsheet.
-
-    """
-    new_row_df = pd.DataFrame(data=[kwargs])
-
-    sheet = read_google_spreadsheet(
-        spread=spread,
-        sheet=sheet,
-    )
-
-    new_row_index = sheet.get_sheet_dims()[0] + 1
-
-    sheet.df_to_sheet(
-        df=new_row_df,
-        index=False,
-        headers=None,
-        start=(new_row_index, 1),
-        replace=False,
-    )
