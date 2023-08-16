@@ -1,5 +1,6 @@
 gspread_pandas
 openai
+pytz
 requests
 streamlit~=1.25
 tiktoken

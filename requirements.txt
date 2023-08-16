@@ -119,7 +119,9 @@ python-dateutil==2.8.2
     #   pandas
     #   streamlit
 pytz==2023.3
-    # via pandas
+    # via
+    #   -r requirements.in
+    #   pandas
 pytz-deprecation-shim==0.1.0.post0
     # via tzlocal
 referencing==0.30.2

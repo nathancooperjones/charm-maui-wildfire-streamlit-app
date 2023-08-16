@@ -1,6 +1,7 @@
-from datetime import date
+from datetime import datetime
 
 import openai
+import pytz
 import streamlit as st
 
 from utils import (
@@ -44,7 +45,8 @@ if 'messages' not in st.session_state:
     with open(file='initial_prompt.txt', mode='r') as fp:
         initial_prompt_string = fp.read()
 
-    initial_prompt_string += f'The current date today is: {date.today()}'
+    hawaii_current_datetime = datetime.now(tz=pytz.timezone(zone='Pacific/Honolulu'))
+    initial_prompt_string += f'The current date today is: {hawaii_current_datetime.date()}'
 
     st.session_state.messages.append(
         {

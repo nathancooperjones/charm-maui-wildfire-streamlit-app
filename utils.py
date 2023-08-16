@@ -38,7 +38,7 @@ def read_newsletter_tab_of_spreadsheet() -> str:
         .reset_index(drop=True)
     )
 
-    spreadsheet_str_representation = ''
+    spreadsheet_str_representation = '**Selected email summaries considered:**  \n  \n'
 
     for idx, row in spreadsheet_df_filtered.iterrows():
         # add a line separator to the end of every email except the last
@@ -49,7 +49,7 @@ def read_newsletter_tab_of_spreadsheet() -> str:
             f'Email ID: {row["id"]}  \n'
             f'Email Date: {row["date"]}  \n'
             # f'Email Body: {row["body"]}  \n'
-            f'Summarized Relief Info: {row["relief_info"]}  \n'
+            f'Auto-Summarized Relief Info: {row["relief_info"]}  \n'
         )
 
     return spreadsheet_str_representation
