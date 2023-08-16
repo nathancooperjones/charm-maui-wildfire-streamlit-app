@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 
 import openai
 import pytz
@@ -39,13 +39,14 @@ st.markdown('-----')
 # Initialize OpenAI and session state variables
 openai.api_key = st.secrets['openai']['api_key']
 
+hawaii_current_datetime = datetime.now(tz=pytz.timezone(zone='Pacific/Honolulu'))
+
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
     with open(file='initial_prompt.txt', mode='r') as fp:
         initial_prompt_string = fp.read()
 
-    hawaii_current_datetime = datetime.now(tz=pytz.timezone(zone='Pacific/Honolulu'))
     initial_prompt_string += f'The current date today is: {hawaii_current_datetime.date()}'
 
     st.session_state.messages.append(
@@ -63,8 +64,27 @@ if 'generation_mode' not in st.session_state:
 button_placeholder = st.empty()
 
 if not st.session_state.generation_mode:
-    if button_placeholder.button(label='Generate newsletter!'):
-        st.session_state.generation_mode = True
+    with button_placeholder.container():
+        datetimes_selected = st.date_input(
+            label='Select a date range of emails to consider',
+            value=(date(year=2023, month=8, day=8), hawaii_current_datetime),
+            max_value=hawaii_current_datetime,
+            help='By default, all emails will be considered, regardless of the time it was sent',
+            format='MM/DD/YYYY',
+        )
+
+        if len(datetimes_selected) == 1:
+            min_datetime = datetimes_selected[0]
+            max_datetime = datetime(year=3005, month=1, day=1)
+        else:
+            min_datetime, max_datetime = datetimes_selected
+
+        # convert ``date``s to ``datetime``s
+        min_datetime = datetime.combine(date=min_datetime, time=datetime.min.time())
+        max_datetime = datetime.combine(date=max_datetime, time=datetime.max.time())
+
+        if st.button(label='Generate newsletter!'):
+            st.session_state.generation_mode = True
 
 
 # Kick off chat with OpenAI API
@@ -85,7 +105,10 @@ if st.session_state.generation_mode:
 
     if 'initial_newsletter_draft' not in st.session_state:
         # Read parsed data from Google Spreadsheet, prepare initial prompt
-        spreadsheet_str_representation = read_newsletter_tab_of_spreadsheet()
+        spreadsheet_str_representation = read_newsletter_tab_of_spreadsheet(
+            min_datetime=min_datetime,
+            max_datetime=max_datetime,
+        )
 
         with st.chat_message(name='user', avatar=EMAIL_SUMMARY_AVATAR):
             st.markdown(body=spreadsheet_str_representation)

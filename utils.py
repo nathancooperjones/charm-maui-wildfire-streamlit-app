@@ -1,6 +1,8 @@
+from datetime import datetime
 import time
 
 import openai
+import pandas as pd
 import streamlit as st
 import tiktoken
 
@@ -10,7 +12,7 @@ from input_output import read_google_spreadsheet
 TIKTOKEN_TOKENIZER = tiktoken.encoding_for_model(model_name=st.secrets['openai']['model'])
 
 
-def read_newsletter_tab_of_spreadsheet() -> str:
+def read_newsletter_tab_of_spreadsheet(min_datetime: datetime, max_datetime: datetime) -> str:
     """
     Read the newsletter parsed results table from the Spreadsheet and convert it all into a single
     prompt string we can send to OpenAI.
@@ -30,13 +32,26 @@ def read_newsletter_tab_of_spreadsheet() -> str:
             .dropna(how='all')
         )
 
-    # filter irrelevant emails out if they do NOT contain relief information
+    spreadsheet_df['date'] = pd.to_datetime(arg=spreadsheet_df['date'], format='%m/%d/%y')
+
+    # 1) filter down by dates and 2) filter out emails that do NOT contain relief information
     spreadsheet_df_filtered = (
         spreadsheet_df[
-            ~spreadsheet_df['relief_info'].str.lower().str.strip().str.contains('na')
+            (spreadsheet_df['date'] >= min_datetime)
+            & (spreadsheet_df['date'] <= max_datetime)
+            & (~spreadsheet_df['relief_info'].str.lower().str.strip().str.contains('na'))
         ]
         .reset_index(drop=True)
     )
+
+    if len(spreadsheet_df_filtered) == 0:
+        st.error(
+            body=(
+                'We no longer have any emails left to display, refresh and try again with a '
+                'different date range.'
+            ),
+        )
+        st.stop()
 
     spreadsheet_str_representation = '**Selected email summaries considered:**  \n  \n'
 
