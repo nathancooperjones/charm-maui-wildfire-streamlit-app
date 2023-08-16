@@ -8,7 +8,9 @@ Currently, there is a wildfire disaster in Maui, and we are working to distribut
 **Example Newsletter for Reference:**
 (Note: We don't want to exactly copy this; instead, we can use this as a point of reference.)
 
-```
+Your output should be as readable plain text, you do not need the tripple quotes I placed around the sample newsletter
+
+'''
 Aloha!
 Dear <<First Name>>:
 
@@ -46,6 +48,6 @@ Maui radio stations include the following:
 *Housing for Displaced*
 * Individual Property Owners are donating their spaces to be used for displaced families. TO CONTRIBUTE, SUBMIT FORM HERE. To receive a home from this network, please sign up with FEMA and they will receive these submissions to match with displaced.
 * Ulupalakua Ranch has space available for horses and farm animals. Call 808.268.328
-```
+'''
 
 With this, we will now send all email relief information chunks below. Use this to create a first draft of a newsletter to send out to the community. After this, we will iterate back-and-forth to improve this before sending out. We are working for Maui County Councilmember Yuki Lei Sugimura, so the newsletter should be generated as if it was coming from her and her office.
