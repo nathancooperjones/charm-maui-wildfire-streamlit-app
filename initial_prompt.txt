@@ -8,7 +8,7 @@ Currently, there is a wildfire disaster in Maui, and we are working to distribut
 **Example Newsletter for Reference:**
 (Note: We don't want to exactly copy this; instead, we can use this as a point of reference.)
 
-Your output should be as readable plain text, you do not need the tripple quotes I placed around the sample newsletter
+Your output should be as readable plain text, you do not need the triple quotes I placed around the sample newsletter
 
 '''
 Aloha!
